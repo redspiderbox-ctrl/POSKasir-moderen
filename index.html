@@ -27,8 +27,7 @@
       --border: #e5e7eb;
       --success: #2d6a4f;
       --warning: #e76f51;
-      /* Ukuran font dasar lebih kecil */
-      --font-base: 0.875rem; /* 14px */
+      --font-base: 0.875rem;
     }
 
     * { box-sizing: border-box; }
@@ -574,7 +573,7 @@
         <div class="table-container">
           <div class="table-responsive">
             <table class="table table-hover align-middle">
-              <thead><tr><th>ID</th><th>Nama</th><th>Kategori</th><th>Stok</th><th>Modal</th><th>Laba</th><th>Total Laba</th><th>Jual</th><th>Aksi</th></tr></thead>
+              <thead><tr><th>ID</th><th>Nama</th><th>Kategori</th><th>Stok</th><th>Modal</th><th>Total Modal</th><th>Laba</th><th>Total Laba</th><th>Jual</th><th>Aksi</th></tr></thead>
               <tbody id="table-products"></tbody>
             </table>
           </div>
@@ -1187,13 +1186,14 @@
       const search = document.getElementById('prod-search')?.value?.toLowerCase() || '';
       const tbody = document.getElementById('table-products');
       const filtered = appData.products.filter(p => (p.id && p.id.toLowerCase().includes(search)) || (p.nama && p.nama.toLowerCase().includes(search)) || (p.kategori && p.kategori.toLowerCase().includes(search)));
-      if (filtered.length === 0) { tbody.innerHTML = '<tr><td colspan="9" class="text-center text-muted py-3">Produk tidak ditemukan</td></tr>'; return; }
+      if (filtered.length === 0) { tbody.innerHTML = '<tr><td colspan="10" class="text-center text-muted py-3">Produk tidak ditemukan</td></tr>'; return; }
       tbody.innerHTML = filtered.map(p => {
         const laba = p.jual - p.modal;
         const totalLaba = laba * p.stok;
+        const totalModal = p.modal * p.stok;
         const labaColor = laba >= 0 ? 'var(--success)' : '#dc2626';
         const totalLabaColor = totalLaba >= 0 ? 'var(--success)' : '#dc2626';
-        return `<tr><td class="fw-medium">${p.id}</td><td>${p.nama}</td><td><span class="badge-cat">${p.kategori}</span></td><td><span class="badge ${p.stok <= 5 ? (p.stok === 0 ? 'bg-danger' : 'bg-warning text-dark') : 'bg-light text-dark border'}" style="font-size:0.7rem;">${p.stok}</span></td><td>${formatRp(p.modal)}</td><td class="fw-bold" style="color:${labaColor}; font-size:0.8rem;">${formatRp(laba)}</td><td class="fw-bold" style="color:${totalLabaColor}; font-size:0.8rem;">${formatRp(totalLaba)}</td><td class="fw-semibold">${formatRp(p.jual)}</td><td><button class="btn btn-sm btn-outline-primary me-1" style="border-radius:6px; font-size:0.7rem; padding:2px 6px;" onclick='openProductModal(${JSON.stringify(p)})'><i class="bi bi-pencil"></i></button><button class="btn btn-sm btn-outline-danger" style="border-radius:6px; font-size:0.7rem; padding:2px 6px;" onclick="deleteProd('${p.fbKey}')"><i class="bi bi-trash"></i></button></td></tr>`;
+        return `<tr><td class="fw-medium">${p.id}</td><td>${p.nama}</td><td><span class="badge-cat">${p.kategori}</span></td><td><span class="badge ${p.stok <= 5 ? (p.stok === 0 ? 'bg-danger' : 'bg-warning text-dark') : 'bg-light text-dark border'}" style="font-size:0.7rem;">${p.stok}</span></td><td>${formatRp(p.modal)}</td><td class="fw-bold" style="color:var(--sidebar-bg);">${formatRp(totalModal)}</td><td class="fw-bold" style="color:${labaColor}; font-size:0.8rem;">${formatRp(laba)}</td><td class="fw-bold" style="color:${totalLabaColor}; font-size:0.8rem;">${formatRp(totalLaba)}</td><td class="fw-semibold">${formatRp(p.jual)}</td><td><button class="btn btn-sm btn-outline-primary me-1" style="border-radius:6px; font-size:0.7rem; padding:2px 6px;" onclick='openProductModal(${JSON.stringify(p)})'><i class="bi bi-pencil"></i></button><button class="btn btn-sm btn-outline-danger" style="border-radius:6px; font-size:0.7rem; padding:2px 6px;" onclick="deleteProd('${p.fbKey}')"><i class="bi bi-trash"></i></button></td></tr>`;
       }).join('');
     }
 
@@ -1240,6 +1240,7 @@
       const excelData = appData.products.map((p, index) => {
         const laba = p.jual - p.modal;
         const totalLaba = laba * p.stok;
+        const totalModal = p.modal * p.stok;
         return {
           'No': index + 1,
           'ID Produk': p.id,
@@ -1247,6 +1248,7 @@
           'Kategori': p.kategori,
           'Stok': p.stok,
           'Harga Modal': p.modal,
+          'Total Modal': totalModal,
           'Laba': laba,
           'Total Laba': totalLaba,
           'Harga Jual': p.jual
@@ -1254,7 +1256,7 @@
       });
       const wb = XLSX.utils.book_new();
       const ws = XLSX.utils.json_to_sheet(excelData);
-      ws['!cols'] = [{ wch: 5 }, { wch: 18 }, { wch: 30 }, { wch: 20 }, { wch: 10 }, { wch: 18 }, { wch: 18 }, { wch: 18 }, { wch: 18 }];
+      ws['!cols'] = [{ wch: 5 }, { wch: 18 }, { wch: 30 }, { wch: 20 }, { wch: 10 }, { wch: 18 }, { wch: 18 }, { wch: 18 }, { wch: 18 }, { wch: 18 }];
       XLSX.utils.book_append_sheet(wb, ws, 'Data Produk');
       const now = new Date(); const dateStr = now.toLocaleDateString('id-ID', { day: '2-digit', month: '2-digit', year: 'numeric' }).replace(/\//g, '-');
       XLSX.writeFile(wb, `Data_Produk_KasirPOS_${dateStr}.xlsx`);
