@@ -14,22 +14,19 @@
 
     <style>
         :root {
-            /* Skema Warna Baru sesuai gambar referensi */
-            --primary: #e63946; /* Merah untuk aksen */
+            --primary: #e63946;
             --primary-hover: #c1121f;
             --primary-glow: rgba(230, 57, 70, 0.25);
-            --bg-main: #f4f6f9; /* Abu-abu kebiruan muda */
-            --sidebar-bg: #1e293b; /* Biru tua gelap */
-            --sidebar-hover: rgba(255, 255, 255, 0.06);
+            --bg-main: #fafafa;
+            --sidebar-bg: #000000;        /* HITAM SOLID */
+            --sidebar-hover: rgba(255, 255, 255, 0.08);
             --sidebar-active: #e63946;
             --text-dark: #0f172a;
             --text-muted: #64748b;
             --card-bg: #ffffff;
-            --border: #e2e8f0;
-            --success: #10b981;
-            --warning: #f59e0b;
-            --info: #3b82f6;
-            --purple: #8b5cf6;
+            --border: #e5e7eb;
+            --success: #2d6a4f;
+            --warning: #e76f51;
             --font-base: 0.875rem;
         }
 
@@ -66,7 +63,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(160deg, #1e293b 0%, #0f172a 50%, #1e293b 100%);
+            background: linear-gradient(160deg, #1d3557 0%, #0d1b2a 50%, #1d3557 100%);
             position: relative;
             overflow: hidden;
         }
@@ -85,7 +82,7 @@
             position: absolute;
             width: 500px;
             height: 500px;
-            background: radial-gradient(circle, rgba(59, 130, 246, 0.2) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(29, 53, 87, 0.4) 0%, transparent 70%);
             bottom: -150px;
             left: -150px;
             animation: floatBlob 10s ease-in-out infinite reverse;
@@ -114,7 +111,7 @@
         .login-logo {
             width: 64px;
             height: 64px;
-            background: linear-gradient(135deg, var(--primary), var(--sidebar-bg));
+            background: linear-gradient(135deg, var(--primary), #000000);
             border-radius: 16px;
             display: flex;
             align-items: center;
@@ -131,7 +128,7 @@
             display: none;
         }
 
-        /* SIDEBAR */
+        /* SIDEBAR - HITAM SOLID */
         .sidebar {
             width: 250px;
             height: 100vh;
@@ -145,7 +142,7 @@
             z-index: 1000;
             display: flex;
             flex-direction: column;
-            box-shadow: 4px 0 20px rgba(0, 0, 0, 0.1);
+            box-shadow: 4px 0 20px rgba(0, 0, 0, 0.3);
         }
         .sidebar-brand {
             padding: 18px 20px 16px;
@@ -245,61 +242,83 @@
             font-size: 0.8rem;
         }
 
-        /* --- STAT CARD BARU (Warna Solid) --- */
+        /* ========== STAT CARD BERWARNA ========== */
         .stat-card {
-            border-radius: 12px;
+            border-radius: 14px;
             padding: 18px 20px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-            transition: transform 0.2s, box-shadow 0.2s;
-            color: white;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            transition: transform 0.25s, box-shadow 0.25s;
             position: relative;
             overflow: hidden;
-            height: 100%;
+            color: #fff;
+            border: none;
         }
         .stat-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.15);
         }
-        .stat-card .stat-icon {
-            width: 44px;
-            height: 44px;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-            background: rgba(255, 255, 255, 0.2);
-            color: white;
+        .stat-card::after {
+            content: '';
+            position: absolute;
+            top: -30px;
+            right: -30px;
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.12);
+            pointer-events: none;
         }
         .stat-card .stat-label {
             font-size: 0.75rem;
             opacity: 0.9;
-            font-weight: 500;
-            margin-bottom: 4px;
+            margin-bottom: 2px;
         }
-        .stat-card .stat-value {
-            font-size: 1.25rem;
-            font-weight: 700;
+        .stat-card h4 {
+            font-weight: 800;
+            font-size: 1.15rem;
             margin-bottom: 0;
-            letter-spacing: -0.5px;
+            color: #fff;
         }
-        .stat-card .stat-trend {
-            font-size: 0.7rem;
-            opacity: 0.8;
+        .stat-card .stat-icon {
+            width: 46px;
+            height: 46px;
+            border-radius: 12px;
             display: flex;
             align-items: center;
-            gap: 4px;
-            margin-top: 6px;
+            justify-content: center;
+            font-size: 1.3rem;
+            background: rgba(255, 255, 255, 0.2);
+            color: #fff;
+            backdrop-filter: blur(4px);
         }
-        .stat-card .stat-trend i {
-            font-size: 0.8rem;
+
+        /* Warna gradien untuk kartu Dashboard */
+        .stat-card.card-pendapatan {
+            background: linear-gradient(135deg, #e63946 0%, #c1121f 100%);
         }
-        
-        /* Warna Spesifik Kartu */
-        .stat-card.bg-blue { background: linear-gradient(135deg, #3b82f6, #2563eb); }
-        .stat-card.bg-green { background: linear-gradient(135deg, #10b981, #059669); }
-        .stat-card.bg-purple { background: linear-gradient(135deg, #8b5cf6, #7c3aed); }
-        .stat-card.bg-red { background: linear-gradient(135deg, #ef4444, #dc2626); }
+        .stat-card.card-laba {
+            background: linear-gradient(135deg, #2d6a4f 0%, #1b4332 100%);
+        }
+        .stat-card.card-trx {
+            background: linear-gradient(135deg, #f4a261 0%, #e76f51 100%);
+        }
+        .stat-card.card-modal {
+            background: linear-gradient(135deg, #2b2b2b 0%, #000000 100%);
+        }
+
+        /* Warna gradien untuk kartu Laporan */
+        .stat-card.card-rpt-pendapatan {
+            background: linear-gradient(135deg, #e63946 0%, #c1121f 100%);
+        }
+        .stat-card.card-rpt-modal {
+            background: linear-gradient(135deg, #7f1d1d 0%, #450a0a 100%);
+        }
+        .stat-card.card-rpt-laba {
+            background: linear-gradient(135deg, #2d6a4f 0%, #1b4332 100%);
+        }
+        .stat-card.card-rpt-trx {
+            background: linear-gradient(135deg, #f4a261 0%, #e76f51 100%);
+        }
 
         .table-container {
             background: var(--card-bg);
@@ -372,7 +391,7 @@
             justify-content: center;
             margin: 0 auto 8px;
             font-size: 1.1rem;
-            color: var(--sidebar-bg);
+            color: #000000;
         }
         .cart-items {
             flex: 1;
@@ -459,13 +478,13 @@
             bottom: 20px;
             right: 20px;
             padding: 8px 14px;
-            background: var(--sidebar-bg);
+            background: #000000;
             color: white;
             border-radius: 20px;
             font-size: 0.7rem;
             z-index: 9998;
             display: none;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
             font-weight: 500;
         }
         #sync-indicator i {
@@ -508,7 +527,7 @@
             background: #dc2626;
         }
         .custom-toast.info {
-            background: var(--sidebar-bg);
+            background: #000000;
         }
         @keyframes slideIn {
             to {
@@ -858,7 +877,7 @@
                         <span>Realtime Connected</span>
                     </div>
                     <div class="d-flex align-items-center gap-1">
-                        <div style="width:28px;height:28px;background:var(--sidebar-bg);border-radius:8px;display:flex;align-items:center;justify-content:center;">
+                        <div style="width:28px;height:28px;background:#000000;border-radius:8px;display:flex;align-items:center;justify-content:center;">
                             <i class="bi bi-person-fill text-white" style="font-size:0.9rem;"></i>
                         </div>
                         <span class="fw-semibold d-none d-md-inline" style="font-size:0.8rem;" id="user-display"></span>
@@ -893,55 +912,51 @@
                         </div>
                     </div>
                 </div>
-                
-                <!-- Kartu Statistik Baru (Warna Solid) -->
+
+                <!-- ===== KARTU STATISTIK DASHBOARD BERWARNA ===== -->
                 <div class="row g-3 mb-3">
                     <div class="col-md-3">
-                        <div class="stat-card bg-blue">
-                            <div class="d-flex justify-content-between align-items-start">
+                        <div class="stat-card card-pendapatan">
+                            <div class="d-flex justify-content-between align-items-center">
                                 <div>
-                                    <div class="stat-label">Pendapatan</div>
-                                    <h4 class="stat-value" id="dash-pendapatan">Rp 0</h4>
+                                    <p class="stat-label mb-0">Pendapatan</p>
+                                    <h4 id="dash-pendapatan">Rp 0</h4>
                                 </div>
                                 <div class="stat-icon"><i class="bi bi-cash-stack"></i></div>
                             </div>
-                            <div class="stat-trend"><i class="bi bi-arrow-up"></i> 2.5%</div>
                         </div>
                     </div>
                     <div class="col-md-3">
-                        <div class="stat-card bg-green">
-                            <div class="d-flex justify-content-between align-items-start">
+                        <div class="stat-card card-laba">
+                            <div class="d-flex justify-content-between align-items-center">
                                 <div>
-                                    <div class="stat-label">Laba Bersih</div>
-                                    <h4 class="stat-value" id="dash-laba">Rp 0</h4>
+                                    <p class="stat-label mb-0">Laba Bersih</p>
+                                    <h4 id="dash-laba">Rp 0</h4>
                                 </div>
                                 <div class="stat-icon"><i class="bi bi-graph-up"></i></div>
                             </div>
-                            <div class="stat-trend"><i class="bi bi-arrow-up"></i> 5.1%</div>
                         </div>
                     </div>
                     <div class="col-md-3">
-                        <div class="stat-card bg-purple">
-                            <div class="d-flex justify-content-between align-items-start">
+                        <div class="stat-card card-trx">
+                            <div class="d-flex justify-content-between align-items-center">
                                 <div>
-                                    <div class="stat-label">Total Transaksi</div>
-                                    <h4 class="stat-value" id="dash-trx">0</h4>
+                                    <p class="stat-label mb-0">Total Transaksi</p>
+                                    <h4 id="dash-trx">0</h4>
                                 </div>
                                 <div class="stat-icon"><i class="bi bi-receipt"></i></div>
                             </div>
-                            <div class="stat-trend"><i class="bi bi-arrow-up"></i> 1.2%</div>
                         </div>
                     </div>
                     <div class="col-md-3">
-                        <div class="stat-card bg-red">
-                            <div class="d-flex justify-content-between align-items-start">
+                        <div class="stat-card card-modal">
+                            <div class="d-flex justify-content-between align-items-center">
                                 <div>
-                                    <div class="stat-label">Modal Gudang</div>
-                                    <h4 class="stat-value" id="dash-modal">Rp 0</h4>
+                                    <p class="stat-label mb-0">Modal Gudang</p>
+                                    <h4 id="dash-modal">Rp 0</h4>
                                 </div>
                                 <div class="stat-icon"><i class="bi bi-archive"></i></div>
                             </div>
-                            <div class="stat-trend"><i class="bi bi-arrow-up"></i> 4.3%</div>
                         </div>
                     </div>
                 </div>
@@ -1196,12 +1211,55 @@
             <!-- ====== REPORTS PAGE ====== -->
             <div id="page-reports" class="page-content" style="display:none;">
                 <div class="page-header"><h2>Laporan Penjualan</h2></div>
+
+                <!-- ===== KARTU LAPORAN BERWARNA ===== -->
                 <div class="row g-2 mb-3">
-                    <div class="col-md-3"><div class="stat-card bg-blue"><div class="stat-label">Total Pendapatan</div><h4 class="stat-value" id="rpt-pendapatan">Rp 0</h4></div></div>
-                    <div class="col-md-3"><div class="stat-card bg-red"><div class="stat-label">Total Modal</div><h4 class="stat-value" id="rpt-modal">Rp 0</h4></div></div>
-                    <div class="col-md-3"><div class="stat-card bg-green"><div class="stat-label">Total Laba</div><h4 class="stat-value" id="rpt-laba">Rp 0</h4></div></div>
-                    <div class="col-md-3"><div class="stat-card bg-purple"><div class="stat-label">Jumlah Transaksi</div><h4 class="stat-value" id="rpt-trx">0</h4></div></div>
+                    <div class="col-md-3">
+                        <div class="stat-card card-rpt-pendapatan">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <p class="stat-label mb-0">Total Pendapatan</p>
+                                    <h4 id="rpt-pendapatan">Rp 0</h4>
+                                </div>
+                                <div class="stat-icon"><i class="bi bi-cash-stack"></i></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="stat-card card-rpt-modal">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <p class="stat-label mb-0">Total Modal</p>
+                                    <h4 id="rpt-modal">Rp 0</h4>
+                                </div>
+                                <div class="stat-icon"><i class="bi bi-wallet2"></i></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="stat-card card-rpt-laba">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <p class="stat-label mb-0">Total Laba</p>
+                                    <h4 id="rpt-laba">Rp 0</h4>
+                                </div>
+                                <div class="stat-icon"><i class="bi bi-graph-up-arrow"></i></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="stat-card card-rpt-trx">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <p class="stat-label mb-0">Jumlah Transaksi</p>
+                                    <h4 id="rpt-trx">0</h4>
+                                </div>
+                                <div class="stat-icon"><i class="bi bi-receipt"></i></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+
                 <div class="table-container mb-3">
                     <div class="row align-items-end g-2 p-2 bg-light rounded-3">
                         <div class="col-md-3"><label class="form-label fw-medium" style="font-size:0.75rem;">Tanggal Mulai</label><input type="date" id="rpt-start" class="form-control" style="border-radius:8px;font-size:0.8rem;padding:4px 8px;" onchange="loadReport()" /></div>
@@ -1670,7 +1728,6 @@
 
         function setSortOrder(order) {
             localStorage.setItem('productSortOrder', order);
-            // Sync both dropdowns
             const prodSort = document.getElementById('prod-sort');
             const posSort = document.getElementById('pos-sort');
             if (prodSort) prodSort.value = order;
@@ -1681,7 +1738,6 @@
             const order = document.getElementById('prod-sort').value;
             setSortOrder(order);
             renderProducts();
-            // If POS is visible, refresh it too
             if (document.getElementById('page-pos').style.display !== 'none') {
                 renderPosProducts();
             }
@@ -1691,7 +1747,6 @@
             const order = document.getElementById('pos-sort').value;
             setSortOrder(order);
             renderPosProducts();
-            // If Products page is visible, refresh it too
             if (document.getElementById('page-products').style.display !== 'none') {
                 renderProducts();
             }
@@ -1885,7 +1940,6 @@
                 return isAsc ? valA.localeCompare(valB) : valB.localeCompare(valA);
             });
 
-            // Sync dropdown
             const prodSort = document.getElementById('prod-sort');
             if (prodSort && prodSort.value !== sortBy) {
                 prodSort.value = sortBy;
@@ -1903,7 +1957,7 @@
                 const totalModal = p.modal * p.stok;
                 const labaColor = laba >= 0 ? 'var(--success)' : '#dc2626';
                 const totalLabaColor = totalLaba >= 0 ? 'var(--success)' : '#dc2626';
-                return `<tr><td class="fw-medium">${p.id}</td><td>${p.nama}</td><td><span class="badge-cat">${p.kategori}</span></td><td><span class="badge ${p.stok <= 5 ? (p.stok === 0 ? 'bg-danger' : 'bg-warning text-dark') : 'bg-light text-dark border'}" style="font-size:0.7rem;">${p.stok}</span></td><td>${formatRp(p.modal)}</td><td class="fw-bold" style="color:var(--sidebar-bg);">${formatRp(totalModal)}</td><td class="fw-bold" style="color:${labaColor};font-size:0.8rem;">${formatRp(laba)}</td><td class="fw-bold" style="color:${totalLabaColor};font-size:0.8rem;">${formatRp(totalLaba)}</td><td class="fw-semibold">${formatRp(p.jual)}</td><td><button class="btn btn-sm btn-outline-primary me-1" style="border-radius:6px;font-size:0.7rem;padding:2px 6px;" onclick='openProductModal(${JSON.stringify(p)})'><i class="bi bi-pencil"></i></button><button class="btn btn-sm btn-outline-danger" style="border-radius:6px;font-size:0.7rem;padding:2px 6px;" onclick="deleteProd('${p.fbKey}')"><i class="bi bi-trash"></i></button></td></tr>`;
+                return `<tr><td class="fw-medium">${p.id}</td><td>${p.nama}</td><td><span class="badge-cat">${p.kategori}</span></td><td><span class="badge ${p.stok <= 5 ? (p.stok === 0 ? 'bg-danger' : 'bg-warning text-dark') : 'bg-light text-dark border'}" style="font-size:0.7rem;">${p.stok}</span></td><td>${formatRp(p.modal)}</td><td class="fw-bold" style="color:#000000;">${formatRp(totalModal)}</td><td class="fw-bold" style="color:${labaColor};font-size:0.8rem;">${formatRp(laba)}</td><td class="fw-bold" style="color:${totalLabaColor};font-size:0.8rem;">${formatRp(totalLaba)}</td><td class="fw-semibold">${formatRp(p.jual)}</td><td><button class="btn btn-sm btn-outline-primary me-1" style="border-radius:6px;font-size:0.7rem;padding:2px 6px;" onclick='openProductModal(${JSON.stringify(p)})'><i class="bi bi-pencil"></i></button><button class="btn btn-sm btn-outline-danger" style="border-radius:6px;font-size:0.7rem;padding:2px 6px;" onclick="deleteProd('${p.fbKey}')"><i class="bi bi-trash"></i></button></td></tr>`;
             }).join('');
         }
 
@@ -2781,7 +2835,6 @@
             const search = document.getElementById('pos-search')?.value?.toLowerCase() || '';
             const sortBy = getSortOrder();
 
-            // Sync dropdown POS
             const posSort = document.getElementById('pos-sort');
             if (posSort && posSort.value !== sortBy) {
                 posSort.value = sortBy;
@@ -2867,7 +2920,6 @@
             const idTrx = 'TRX-' + Date.now();
             const timestamp = Date.now();
 
-            // Gunakan format tanggal dari pengaturan
             const dateFormat = appSettings.dateFormat || 'id-ID';
             const tgl = new Date().toLocaleString(dateFormat);
 
@@ -3038,7 +3090,6 @@
         function loadSettings() {
             applySettingsToUI();
             updatePrinterStatus();
-            // Sync sort dropdowns with stored value
             const sortOrder = getSortOrder();
             const prodSort = document.getElementById('prod-sort');
             const posSort = document.getElementById('pos-sort');
@@ -3185,7 +3236,6 @@
             document.getElementById('dash-start').value = '';
             document.getElementById('dash-end').value = '';
 
-            // Set default sort order if not exists
             if (!localStorage.getItem('productSortOrder')) {
                 localStorage.setItem('productSortOrder', 'nama-asc');
             }
